@@ -107,7 +107,7 @@ const Main = (props) => {
     }
   }, [props]);
   return (
-    <>
+    <div className="w-100 h-100" style={{padding: "10px 0"}}>
       {props.isLoading ? (
         <LoadingPage />
       ) : (
@@ -156,7 +156,7 @@ const Main = (props) => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

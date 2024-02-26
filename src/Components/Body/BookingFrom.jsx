@@ -148,7 +148,7 @@ const BookingForm = (props) => {
                 name="end"
               />
               <h3 className="text-center">
-                Price: {day * props.car.per_day_rent}৳
+                Rent: {day * props.car.per_day_rent}৳
               </h3>
               <button
                 style={{ width: "100%" }}

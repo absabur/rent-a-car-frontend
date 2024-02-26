@@ -47,7 +47,7 @@ const MyBookings = (props) => {
                 <span>Car: {booking.car.car_name}</span>
                 <span>Start Date: {booking.start_date}</span>
                 <span>End Date: {booking.end_date}</span>
-                <span>Price: {booking.price}৳</span>
+                <span>Rent: {booking.price}৳</span>
               </div>
             </div>
           ))}

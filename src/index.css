@@ -11,6 +11,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(90deg, #c1d3f0 5%, #b7b9e6 50%, #b8ece5 100%)
+    center;
+  min-height: 100vh;
+  color: white;
 }
 
 code {
