@@ -58,6 +58,10 @@
   padding: 10px;
 }
 
+.card-details span{
+    font-weight: 600;
+}
+
 .card-details p {
   margin: 10px;
   text-align: center;

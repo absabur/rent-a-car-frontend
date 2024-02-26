@@ -53,11 +53,19 @@ const Home = (props) => {
                           src={`https://rentacar.pythonanywhere.com${car.image}`}
                         />
                         <div className="card-details">
-                          <h3>Car Name: {car.car_name}</h3>
-                          <p>Brand: {car.brand}</p>
-                          <p>Engine: {car.engine_cc}cc</p>
-                          <p>Number Of Seats: {car.number_of_seats}</p>
-                          <p>Rent Per Day: {car.per_day_rent}</p>
+                          <h3>Name: {car.car_name}</h3>
+                          <p>
+                            Brand: <span>{car.brand}</span>
+                          </p>
+                          <p>
+                            Engine: <span>{car.engine_cc}cc</span>
+                          </p>
+                          <p>
+                            Number Of Seats: <span>{car.number_of_seats}</span>
+                          </p>
+                          <p>
+                            Rent Per Day: <span>{car.per_day_rent}৳</span>
+                          </p>
                         </div>
                         <div className="book-now">
                           <button
