@@ -1,7 +1,11 @@
 import { ErrorMessage, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { bookCar, bookingList, errorMessage } from "../../Redux/Action/userAction";
+import {
+  bookCar,
+  bookingList,
+  errorMessage,
+} from "../../Redux/Action/userAction";
 import { Navigate, useNavigate } from "react-router-dom";
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -20,13 +24,13 @@ const mapStateToProps = (state) => {
 };
 
 const BookingForm = (props) => {
-  const [day, setDay] = useState(1)
-  const navigate = useNavigate()
+  const [day, setDay] = useState(1);
+  const navigate = useNavigate();
   useEffect(() => {
     props.bookingList(props.car.id);
     if (!props.userId) {
-      props.errorMessage("You must login first.")
-      navigate('/login')
+      props.errorMessage("You must login first.");
+      navigate("/login");
     }
   }, []);
 
@@ -50,7 +54,7 @@ const BookingForm = (props) => {
   }
   return (
     <div>
-        {props.success && <Navigate replace to="/my-bookings"/>}
+      {props.success && <Navigate replace to="/my-bookings" />}
       {props.dates.length == 0 ? (
         <h5 className="m-3 text-center">Available for any date.</h5>
       ) : (
@@ -74,7 +78,7 @@ const BookingForm = (props) => {
               owner: props.car.user,
               start_date: values.start,
               end_date: values.end,
-              price: day*props.car.per_day_rent
+              price: day * props.car.per_day_rent,
             },
             props.token
           )
@@ -102,10 +106,10 @@ const BookingForm = (props) => {
           ) {
             errors.start = "Start date should be greater than current date";
           }
-          for (let date of props.dates) {
-            if (values.start && values.end) {
-              const dateRange = getDates(values.start, values.end);
-              setDay(dateRange.length)
+          if (values.start && values.end) {
+            const dateRange = getDates(values.start, values.end);
+            setDay(dateRange.length);
+            for (let date of props.dates) {
               for (let newdate of dateRange) {
                 if (newdate == date.start_date || newdate == date.end_date) {
                   errors.start = "Already Booked On Your Selected Range.";
@@ -143,7 +147,9 @@ const BookingForm = (props) => {
                 type="date"
                 name="end"
               />
-              <h3 className="text-center">Price: {day*props.car.per_day_rent}৳</h3>
+              <h3 className="text-center">
+                Price: {day * props.car.per_day_rent}৳
+              </h3>
               <button
                 style={{ width: "100%" }}
                 className="btn btn-success"
