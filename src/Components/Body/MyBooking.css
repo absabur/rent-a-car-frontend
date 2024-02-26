@@ -1,0 +1,73 @@
+.booking{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bookings{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.booking-card{
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    color: black;
+    text-decoration: none;
+    transition: all 0.1s;
+}
+
+.booking-card:hover{
+    background-color: #f1f1f1;
+}
+
+.booking-card-image{
+    width: 150px;
+    height: 100%;
+    object-fit: contain;
+    background-color: black;
+}
+
+
+.booking-card-details{
+    width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+
+.upcoming, .over, .running{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(0, 0, 255);
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.over{
+    background-color: rgb(255, 0, 0);
+}
+
+
+.running{
+    background-color: rgb(0, 99, 5);
+}
