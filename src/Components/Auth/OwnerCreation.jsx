@@ -5,7 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { register } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (email, password, name, role, phone) => dispatch(register(email, password, name, "owner", phone)),
+    register: (email, password, name, role, phone) => dispatch(register(email, password, name, role, phone)),
   };
 };
 const mapStateToProps = (state) => {
@@ -20,7 +20,7 @@ const Register = (props) => {
     <div className="mt-2 mb-2">
     {props.userId && <Navigate replace to="/" />}
     <Formik
-      onSubmit={(values) => props.register(values.email, values.password, values.name, values.phone)}
+      onSubmit={(values) => props.register(values.email, values.password, values.name, "owner", values.phone)}
       initialValues={{
         email: "",
         name: "",

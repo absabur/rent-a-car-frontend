@@ -13,7 +13,7 @@ import {
 import { carAdd } from "./ownerAction";
 
 export const register =
-  (email, password, name, role = "user", phone) =>
+  (email, password, name, role="user", phone) =>
   (dispatch) => {
     const data = {
       email: email,
