@@ -30,6 +30,8 @@ import CreateCar from "./Owner/CreateCar";
 import Bookings from "./Owner/Bookings";
 import Cars from "./Owner/Cars";
 import { category } from "../Redux/Action/ownerAction";
+import LoadingPage from "./Loading/Loading";
+import UpdateProfile from "./Body/UpdateProfile";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -46,6 +48,7 @@ const mapStateToProps = (state) => {
     userId: state.auth.userId,
     token: state.auth.token,
     userData: state.auth.userData,
+    isLoading: state.auth.isLoading,
   };
 };
 
@@ -105,47 +108,53 @@ const Main = (props) => {
   }, [props]);
   return (
     <>
-      {props.userId && props.userData.role === "owner" && (
+      {props.isLoading ? (
+        <LoadingPage />
+      ) : (
         <>
-          <button
-            className={`owner-toggle ${toggle && "rotate"}`}
-            type="button"
-            onClick={() => setToggle(!toggle)}
-          >
-            {toggle ? <GiTireIronCross /> : <FaBars />}
-          </button>
-          <div
-            onClick={() => setToggle(false)}
-            className={`owner-bar ${toggle && "open"}`}
-          >
-            <Link to="/create/car">Create a car</Link>
-            <Link to="/owner/booking">Bookings</Link>
-            <Link to="/owner/cars">Cars</Link>
-          </div>
-        </>
-      )}
-      <ToastContainer />
-      {render && (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/owner-account/create" element={<OwnerCreation />} />
-          <Route path="/login" element={<Login />} />
-          {props.userId && (
+          {props.userId && props.userData.role === "owner" && (
             <>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/my-bookings" element={<MyBookings />} />
-              {props.userData.role === "owner" && (
-                <>
-                  <Route path="/create/car" element={<CreateCar />} />
-                  <Route path="/owner/booking" element={<Bookings />} />
-                  <Route path="/owner/cars" element={<Cars />} />
-                </>
-              )}
+              <button
+                className={`owner-toggle ${toggle && "rotate"}`}
+                type="button"
+                onClick={() => setToggle(!toggle)}
+              >
+                {toggle ? <GiTireIronCross /> : <FaBars />}
+              </button>
+              <div
+                onClick={() => setToggle(false)}
+                className={`owner-bar ${toggle && "open"}`}
+              >
+                <Link to="/create/car">Create a car</Link>
+                <Link to="/owner/booking">Bookings</Link>
+                <Link to="/owner/cars">Cars</Link>
+              </div>
             </>
           )}
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
+          <ToastContainer />
+          {render && (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/owner-account/create" element={<OwnerCreation />} />
+              <Route path="/login" element={<Login />} />
+              {props.userId && (
+                <>
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/my-bookings" element={<MyBookings />} />
+                  {props.userData.role === "owner" && (
+                    <>
+                      <Route path="/create/car" element={<CreateCar />} />
+                      <Route path="/owner/booking" element={<Bookings />} />
+                      <Route path="/owner/cars" element={<Cars />} />
+                    </>
+                  )}
+                </>
+              )}
+              <Route path="*" element={<Navigate replace to="/" />} />
+            </Routes>
+          )}
+        </>
       )}
     </>
   );

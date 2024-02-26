@@ -30,11 +30,12 @@ const EditCar = (props) => {
     formData.append("engine_cc", values.engine_cc);
     formData.append("number_of_seats", values.number_of_seats);
     formData.append("out_of_service", values.out_of_service);
+    formData.append("per_day_rent", values.per_day_rent);
     props.editCar(formData, props.car.id);
   };
 
   return (
-    <div className="mt-2 mb-2">
+    <div className="">
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={{
@@ -44,6 +45,7 @@ const EditCar = (props) => {
           engine_cc: props.car.engine_cc,
           number_of_seats: props.car.number_of_seats,
           out_of_service: props.car.out_of_service,
+          per_day_rent: props.car.per_day_rent,
         }}
         validate={(values) => {
           const errors = {};
@@ -65,6 +67,9 @@ const EditCar = (props) => {
           }
           if (!values.number_of_seats) {
             errors.number_of_seats = "Required";
+          }
+          if (!values.per_day_rent) {
+            errors.per_day_rent = "Required";
           }
 
           return errors;
@@ -157,6 +162,16 @@ const EditCar = (props) => {
                 type="text"
                 name="number_of_seats"
                 placeholder="How many Seats"
+              />
+              <label>Rent: </label>{" "}
+              <ErrorMessage name="per_day_rent" component="span" />
+              <input
+                onChange={handleChange}
+                value={values.per_day_rent}
+                className="form-control mb-4"
+                type="text"
+                name="per_day_rent"
+                placeholder="Enter Rent Per Day"
               />
               <label>Out Of Service: </label>{" "}
               <ErrorMessage name="out_of_service" component="span" />

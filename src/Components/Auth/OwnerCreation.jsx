@@ -91,7 +91,7 @@ const Register = (props) => {
             <ErrorMessage name="phone" component="span" />
             <input
               onChange={handleChange}
-              value={values.name}
+              value={values.phone}
               className="form-control mb-4"
               type="text"
               name="phone"

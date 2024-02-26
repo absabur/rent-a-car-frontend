@@ -10,7 +10,7 @@ import {
   REGISTER_LOGIN,
   USER_DATA,
 } from "../Constance";
-import { errorMessage } from "./userAction";
+import { carAdd } from "./ownerAction";
 
 export const register =
   (email, password, name, role = "user", phone) =>
@@ -26,13 +26,42 @@ export const register =
     axios
       .post("https://rentacar.pythonanywhere.com/users/", data)
       .then((res) => {
-        dispatch(login(data.email, data.password));
         dispatch(loadingFalse());
+        dispatch(login(data.email, data.password));
       })
       .catch((error) => {
+        dispatch(loadingFalse());
         const key = Object.keys(error.response.data)[0];
         dispatch(errorAction(error.response.data[key]));
+      });
+  };
+export const updateProfile =
+  (email, name,  phone) =>
+  (dispatch) => {
+    const token = localStorage.getItem("rent-a-car-token");
+    const id = localStorage.getItem("rent-a-car-userId");
+    const header = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    const data = {
+      email: email,
+      name: name,
+      phone: phone,
+    };
+    dispatch(loadingTrue());
+    axios
+      .patch("https://rentacar.pythonanywhere.com/users/"+id+"/", data, header)
+      .then((res) => {
         dispatch(loadingFalse());
+        dispatch(carAdd("Profile Updated!"));
+      })
+      .catch((error) => {
+        dispatch(loadingFalse());
+        console.log(error);
+        const key = Object.keys(error.response.data)[0];
+        dispatch(errorAction(error.response.data[key][0]));
       });
   };
 export const login = (email, password) => (dispatch) => {
@@ -44,13 +73,13 @@ export const login = (email, password) => (dispatch) => {
   axios
     .post("https://rentacar.pythonanywhere.com/token/", data)
     .then((res) => {
-      dispatch(loginAction(res.data.access, "Login successful"));
       dispatch(loadingFalse());
+      dispatch(loginAction(res.data.access, "Login successful"));
     })
     .catch((error) => {
+      dispatch(loadingFalse());
       const key = Object.keys(error.response.data)[0];
       dispatch(errorAction(error.response.data[key]));
-      dispatch(loadingFalse());
     });
 };
 export const userDeatils = () => (dispatch) => {

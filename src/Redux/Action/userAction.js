@@ -7,6 +7,7 @@ import {
   BOOKED,
   ERROR,
 } from "../Constance";
+import { loadingFalse, loadingTrue } from "./authAction";
 
 export const getCars = () => (dispatch) => {
   axios
@@ -55,12 +56,15 @@ export const bookCar = (car, token) => (dispatch) => {
       Authorization: "Bearer " + token,
     },
   };
+  dispatch(loadingTrue());
   axios
     .post("https://rentacar.pythonanywhere.com/book/", car, header)
     .then((res) => {
+      dispatch(loadingFalse());
       dispatch(booked());
     })
     .catch((error) => {
+      dispatch(loadingFalse());
       const key = Object.keys(error.response.data)[0];
       dispatch(errorMessage(error.response.data[key]));
     });

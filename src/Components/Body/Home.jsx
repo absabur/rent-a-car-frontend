@@ -57,6 +57,7 @@ const Home = (props) => {
                           <p>Brand: {car.brand}</p>
                           <p>Engine: {car.engine_cc}cc</p>
                           <p>Number Of Seats: {car.number_of_seats}</p>
+                          <p>Rent Per Day: {car.per_day_rent}</p>
                         </div>
                         <div className="book-now">
                           <button

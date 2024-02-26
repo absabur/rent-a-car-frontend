@@ -1,32 +1,33 @@
 import { ErrorMessage, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
-import { register } from "../../Redux/Action/authAction";
+import { updateProfile, userDeatils } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (email, password, name, role, phone) => dispatch(register(email, password, name, "user",phone)),
+    userDeatils: () => dispatch(userDeatils()),
+    updateProfile: (email, name, phone) => dispatch(updateProfile(email, name, phone)),
   };
 };
 const mapStateToProps = (state) => {
   return {
     success: state.auth.success,
     userId: state.auth.userId,
+    userData: state.auth.userData,
   };
 };
 
-const Register = (props) => {
+const UpdateProfile = (props) => {
+    useEffect(() => {
+        props.userDeatils();
+    }, [])
   return (
-    <div className="mt-2 mb-2">
-    {props.userId && <Navigate replace to="/" />}
+    <div>
       <Formik
-        onSubmit={(values) => props.register(values.email, values.password, values.name, values.phone)}
+        onSubmit={(values) => props.updateProfile(values.email, values.name, values.phone)}
         initialValues={{
-          email: "",
-          name: "",
-          phone: "",
-          password: "",
-          confirmPassword: "",
+          email: props.userData.email,
+          name: props.userData.name,
+          phone: props.userData.phone,
         }}
         validate={(values) => {
           const errors = {};
@@ -43,29 +44,12 @@ const Register = (props) => {
             errors.name = "Required";
           }
 
-          if (!values.password) {
-            errors.password = "Required";
-          } else if (values.password.length < 6) {
-            errors.password = "Password must be at least 6 characters";
-          }
-
-          if (!values.confirmPassword) {
-            errors.confirmPassword = "Required";
-          } else if (values.password !== values.confirmPassword) {
-            errors.confirmPassword =
-              "Password and Confirm Password did not match";
-          }
-
           return errors;
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
           <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
-            <div style={{ textAlign: "center" }}>
-              Already have an account? <Link to="/login">Login</Link>
-            </div>
-            <Link to='/owner-account/create' type="button" className="mt-3 w-100 btn btn-primary" >Create Owner Account</Link>
-            <h1 style={{ textAlign: "center", margin: "1rem" }}>Sign Up</h1>
+            <h1 style={{ textAlign: "center", margin: "1rem" }}>Update Profile</h1>
             <form className="form" onSubmit={handleSubmit}>
               <label>Email: </label>{" "}
               <ErrorMessage name="email" component="span" />
@@ -97,32 +81,12 @@ const Register = (props) => {
                 name="phone"
                 placeholder="Enter You Phone Number"
               />
-              <label>Password: </label>{" "}
-              <ErrorMessage name="password" component="span" />
-              <input
-                onChange={handleChange}
-                value={values.password}
-                className="form-control mb-4"
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-              />
-              <label>Confirm Password: </label>{" "}
-              <ErrorMessage name="confirmPassword" component="span" />
-              <input
-                onChange={handleChange}
-                value={values.confirmPassword}
-                className="form-control mb-4"
-                type="password"
-                name="confirmPassword"
-                placeholder="Enter Password Again"
-              />
               <button
                 style={{ width: "100%" }}
                 className="btn btn-success"
                 type="submit"
               >
-                Sign Up
+                Update
               </button>
             </form>
           </div>
@@ -132,4 +96,4 @@ const Register = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);

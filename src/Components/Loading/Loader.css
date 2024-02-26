@@ -1,0 +1,185 @@
+.loading {
+  width: 100vw;
+  height: 80vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  position: relative;
+}
+
+.outside {
+  position: absolute;
+  width: 90px;
+  height: 95px;
+  border-radius: 100%;
+  border-top: 10px solid rgb(218, 33, 0);
+  border-bottom: 10px solid rgb(139, 0, 97);
+  animation: out 2s linear infinite;
+}
+
+.inside {
+  position: absolute;
+  width: 75px;
+  height: 70px;
+  border-radius: 100%;
+  border-right: 10px solid rgb(0, 89, 255);
+  border-left: 10px solid rgb(0, 97, 13);
+  animation: in 2s linear infinite;
+}
+
+.dot1 {
+  position: absolute;
+  background-color: rgb(119, 107, 0);
+  animation: dot1 1s linear infinite;
+  border-radius: 50%;
+  z-index: 1;
+}
+.dot2 {
+  position: absolute;
+  background-color: rgb(167, 0, 182);
+  animation: dot2 1s linear infinite;
+  animation-delay: 0.5s;
+  border-radius: 50%;
+}
+
+.loading-div {
+  position: relative;
+  height: 11vw;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* background-image: linear-gradient(to right, var(--v1), var(--blue),  var(--v2)); */
+  animation: back 1s linear infinite;
+  opacity: 0.5;
+}
+
+.loading-card {
+  width: 200px;
+  height: 300px;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+  margin: 5px;
+  animation: sliderload 100ms ease infinite;
+}
+
+@keyframes out {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes in {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dot1 {
+  0% {
+    height: 10px;
+    width: 40px;
+  }
+  50% {
+    height: 40px;
+    width: 10px;
+  }
+  100% {
+    height: 10px;
+    width: 40px;
+  }
+}
+
+@keyframes dot2 {
+  0% {
+    height: 10px;
+    width: 40px;
+  }
+  50% {
+    height: 40px;
+    width: 10px;
+  }
+  100% {
+    height: 10px;
+    width: 40px;
+  }
+}
+
+@keyframes back {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes sliderload {
+  0% {
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.125),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+  33% {
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.125),
+      rgba(0, 0, 0, 0.4)
+    );
+  }
+  66% {
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.125)
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.125),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .loading-card {
+    width: 190px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .loading-card {
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .loading-card {
+    width: 170px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .loading-card {
+    width: 165px;
+  }
+}

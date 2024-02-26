@@ -74,7 +74,7 @@ const BookingForm = (props) => {
               owner: props.car.user,
               start_date: values.start,
               end_date: values.end,
-              price: day*2000
+              price: day*props.car.per_day_rent
             },
             props.token
           )
@@ -143,7 +143,7 @@ const BookingForm = (props) => {
                 type="date"
                 name="end"
               />
-              <h3 className="text-center">Price: {day*2000}৳</h3>
+              <h3 className="text-center">Price: {day*props.car.per_day_rent}৳</h3>
               <button
                 style={{ width: "100%" }}
                 className="btn btn-success"

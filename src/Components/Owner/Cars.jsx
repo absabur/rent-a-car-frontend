@@ -38,10 +38,7 @@ const Cars = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (props.success) {
-      navigate("/");
-      setTimeout(() => {
-        navigate("/owner/cars");
-      }, 100);
+      navigate("/owner/cars");
     }
   }, [props]);
   return (
@@ -63,6 +60,7 @@ const Cars = (props) => {
                 <p>Brand: {car.brand}</p>
                 <p>Engine: {car.engine_cc}cc</p>
                 <p>Number Of Seats: {car.number_of_seats}</p>
+                <p>Rent Per Day: {car.per_day_rent}</p>
               </div>
               <div className="book-now">
                 <button

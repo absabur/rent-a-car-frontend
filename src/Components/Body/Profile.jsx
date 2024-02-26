@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "./Home.css";
 import { logout, userDeatils } from "../../Redux/Action/authAction";
-import { Modal } from "reactstrap";
+import { Button, Modal } from "reactstrap";
+import { Link } from "react-router-dom";
+import UpdateProfile from "./UpdateProfile";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,7 +19,11 @@ const mapStateToProps = (state) => {
 };
 
 const Profile = (props) => {
+  const [activeModal, setActiveModal] = useState(null);
   const [modal, setModal] = useState(false);
+  const toggleModal = (modalId) => {
+    setActiveModal(activeModal === modalId ? null : modalId);
+  };
   useEffect(() => {
     props.userDeatils();
   }, []);
@@ -58,7 +64,21 @@ const Profile = (props) => {
         <h3>Name: {props.userData.name}</h3>
         <h3>Email: {props.userData.email}</h3>
         <h3>Phone: {props.userData.phone}</h3>
+        <button onClick={() => toggleModal(props.userData.id)} className="btn btn-warning">
+          Update Profile
+        </button>
       </div>
+
+      <Modal isOpen={activeModal === props.userData.id} toggle={() => toggleModal(props.userData.id)}>
+        <Button
+          color="secondary"
+          className="w-100"
+          onClick={() => toggleModal(props.userData.id)}
+        >
+          Cancel
+        </Button>
+        <UpdateProfile />
+      </Modal>
     </div>
   );
 };
