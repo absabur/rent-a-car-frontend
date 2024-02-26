@@ -5,7 +5,8 @@ import { updateProfile, userDeatils } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
     userDeatils: () => dispatch(userDeatils()),
-    updateProfile: (email, name, phone) => dispatch(updateProfile(email, name, phone)),
+    updateProfile: (email, name, phone) =>
+      dispatch(updateProfile(email, name, phone)),
   };
 };
 const mapStateToProps = (state) => {
@@ -17,13 +18,15 @@ const mapStateToProps = (state) => {
 };
 
 const UpdateProfile = (props) => {
-    useEffect(() => {
-        props.userDeatils();
-    }, [])
+  useEffect(() => {
+    props.userDeatils();
+  }, []);
   return (
     <div>
       <Formik
-        onSubmit={(values) => props.updateProfile(values.email, values.name, values.phone)}
+        onSubmit={(values) =>
+          props.updateProfile(values.email, values.name, values.phone)
+        }
         initialValues={{
           email: props.userData.email,
           name: props.userData.name,
@@ -48,8 +51,10 @@ const UpdateProfile = (props) => {
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
-          <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
-            <h1 style={{ textAlign: "center", margin: "1rem" }}>Update Profile</h1>
+          <div className="p-4">
+            <h1 style={{ textAlign: "center", margin: "1rem" }}>
+              Update Profile
+            </h1>
             <form className="form" onSubmit={handleSubmit}>
               <label>Email: </label>{" "}
               <ErrorMessage name="email" component="span" />

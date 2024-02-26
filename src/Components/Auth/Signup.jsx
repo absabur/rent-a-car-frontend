@@ -5,7 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 import { register } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (email, password, name, role, phone) => dispatch(register(email, password, name, "user",phone)),
+    register: (email, password, name, role, phone) =>
+      dispatch(register(email, password, name, "user", phone)),
   };
 };
 const mapStateToProps = (state) => {
@@ -17,10 +18,17 @@ const mapStateToProps = (state) => {
 
 const Register = (props) => {
   return (
-    <div className="mt-2 mb-2">
-    {props.userId && <Navigate replace to="/" />}
+    <div className="form-parent">
+      {props.userId && <Navigate replace to="/" />}
       <Formik
-        onSubmit={(values) => props.register(values.email, values.password, values.name, values.phone)}
+        onSubmit={(values) =>
+          props.register(
+            values.email,
+            values.password,
+            values.name,
+            values.phone
+          )
+        }
         initialValues={{
           email: "",
           name: "",
@@ -60,11 +68,17 @@ const Register = (props) => {
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
-          <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
+          <div className="p-4">
             <div style={{ textAlign: "center" }}>
               Already have an account? <Link to="/login">Login</Link>
             </div>
-            <Link to='/owner-account/create' type="button" className="mt-3 w-100 btn btn-primary" >Create Owner Account</Link>
+            <Link
+              to="/owner-account/create"
+              type="button"
+              className="mt-3 w-100 btn btn-primary"
+            >
+              Create Owner Account
+            </Link>
             <h1 style={{ textAlign: "center", margin: "1rem" }}>Sign Up</h1>
             <form className="form" onSubmit={handleSubmit}>
               <label>Email: </label>{" "}

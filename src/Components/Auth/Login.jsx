@@ -5,19 +5,19 @@ import { connect } from "react-redux";
 import { login } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (email, password) => dispatch(login(email, password))
-  }
-}
+    login: (email, password) => dispatch(login(email, password)),
+  };
+};
 const mapStateToProps = (state) => {
   return {
     success: state.auth.success,
     userId: state.auth.userId,
-  }
-}
+  };
+};
 
 const Login = (props) => {
   return (
-    <div className="mt-2 mb-2">
+    <div className="form-parent">
       {props.userId && <Navigate replace to="/" />}
       <Formik
         onSubmit={(values) => props.login(values.email, values.password)}
@@ -46,7 +46,7 @@ const Login = (props) => {
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
-          <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
+          <div className="p-4">
             <div style={{ textAlign: "center" }}>
               Don't have an account? <Link to="/signup">Sign Up</Link>
             </div>
@@ -87,4 +87,4 @@ const Login = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

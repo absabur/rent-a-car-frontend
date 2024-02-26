@@ -76,7 +76,7 @@ const EditCar = (props) => {
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
-          <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
+          <div className="p-4">
             <h1 style={{ textAlign: "center", margin: "1rem" }}>
               Edit car details
             </h1>

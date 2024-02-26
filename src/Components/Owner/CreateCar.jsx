@@ -23,7 +23,7 @@ const CreateCar = (props) => {
     formData.append("category", values.category);
     formData.append("car_name", values.car_name);
     formData.append("brand", values.brand);
-    formData.append("image", image); 
+    formData.append("image", image);
     formData.append("user", props.userId);
     formData.append("engine_cc", values.engine_cc);
     formData.append("number_of_seats", values.number_of_seats);
@@ -32,8 +32,8 @@ const CreateCar = (props) => {
     props.createCar(formData);
   };
   return (
-    <div className="mt-2 mb-2">
-    {props.success && <Navigate replace to="/owner/cars" />}
+    <div className="form-parent">
+      {props.success && <Navigate replace to="/owner/cars" />}
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={{
@@ -74,7 +74,7 @@ const CreateCar = (props) => {
         }}
       >
         {({ values, handleChange, handleSubmit }) => (
-          <div className="p-4" style={{ boxShadow: "0 0 5px black" }}>
+          <div className="p-4">
             <h1 style={{ textAlign: "center", margin: "1rem" }}>
               Create A Car
             </h1>
@@ -86,16 +86,15 @@ const CreateCar = (props) => {
                 value={values.category}
                 className="form-control mb-4"
                 name="category"
-                style={{cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
               >
                 <option value="">Select Category</option>
-                {
-                  props.category && props.category.map((category) => (
+                {props.category &&
+                  props.category.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
-                  ))
-                }
+                  ))}
               </select>
               <label>Car Name: </label>{" "}
               <ErrorMessage name="car_name" component="span" />

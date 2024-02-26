@@ -62,7 +62,7 @@ const Home = (props) => {
                         <div className="book-now">
                           <button
                             onClick={() => toggleModal(car.id)}
-                            className="btn btn-success"
+                            className="btn btn-primary"
                             type="button"
                             disabled={car.out_of_service}
                           >
