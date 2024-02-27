@@ -89,7 +89,6 @@ const BookingForm = (props) => {
         }}
         validate={(values) => {
           const errors = {};
-
           if (!values.start) {
             errors.start = "Required";
           }
@@ -97,7 +96,7 @@ const BookingForm = (props) => {
             errors.end = "Required";
           }
           if (values.start > values.end) {
-            errors.start =
+            errors.end =
               "End date should be greater than or equal start date";
           }
           if (
@@ -137,6 +136,7 @@ const BookingForm = (props) => {
                 className="form-control mb-4"
                 type="date"
                 name="start"
+                required
               />
               <label>End Date: </label>{" "}
               <ErrorMessage name="end" component="span" />
@@ -146,6 +146,7 @@ const BookingForm = (props) => {
                 className="form-control mb-4"
                 type="date"
                 name="end"
+                required
               />
               <h3 className="text-center">
                 Rent: {day * props.car.per_day_rent}৳
