@@ -4,6 +4,7 @@ import "./Home.css";
 import { getCars } from "../../Redux/Action/userAction";
 import { Button, Modal } from "reactstrap";
 import BookingFrom from "./BookingFrom";
+import Loading from "../Loading/Loading"
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -30,6 +31,7 @@ const Home = (props) => {
   return (
     <div className="home">
       <h1 className="text-center">Rent A Car</h1>
+      {props.cars.length === 0 || props.cars.length === 0 ? <Loading /> :
       <div className="cars">
         {props.category &&
           props.category.map((category) => (
@@ -41,6 +43,7 @@ const Home = (props) => {
                 Category: {category.name}
               </h3>
               <div className="cars">
+                
                 {props.cars &&
                   props.cars.map((car) =>
                     car.category === category.id ? (
@@ -51,6 +54,7 @@ const Home = (props) => {
                         <img
                           className="card-image"
                           src={`https://rentacar.pythonanywhere.com${car.image}`}
+                          alt="Car"
                         />
                         <div className="card-details">
                           <h3>Name: {car.car_name}</h3>
@@ -97,6 +101,7 @@ const Home = (props) => {
             </div>
           ))}
       </div>
+      }
     </div>
   );
 };

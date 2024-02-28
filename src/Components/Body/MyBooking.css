@@ -12,6 +12,13 @@
     flex-wrap: wrap;
 }
 
+.no-items{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .booking-card{
     position: relative;
     width: 300px;

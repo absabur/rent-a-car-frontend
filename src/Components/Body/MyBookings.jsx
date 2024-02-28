@@ -24,6 +24,7 @@ const MyBookings = (props) => {
   return (
     <div className="booking">
       <h1 className="text-center">My Bookings</h1>
+      {props.booking.length === 0 ? <h3 className="m-auto no-items">No Bookings</h3> :
       <div className="cars">
         {props.booking &&
           props.booking.map((booking) => (
@@ -52,6 +53,7 @@ const MyBookings = (props) => {
             </div>
           ))}
       </div>
+      }
     </div>
   );
 };
