@@ -2,7 +2,7 @@ import { ErrorMessage, Formik } from "formik";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { editCar } from "../../Redux/Action/ownerAction";
-import { Navigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
 const mapDispatchToProps = (dispatch) => {
   return {
     editCar: (data, id) => dispatch(editCar(data, id)),
@@ -33,6 +33,7 @@ const EditCar = (props) => {
     formData.append("per_day_rent", values.per_day_rent);
     props.editCar(formData, props.car.id);
   };
+  console.log(image);
 
   return (
     <div className="">
@@ -118,8 +119,13 @@ const EditCar = (props) => {
                 name="brand"
                 placeholder="Enter Car Brand"
               />
-              <div className="d-flex flex-column w-100">
-                <h4>Previous Image</h4>
+              <div className="d-flex flex-column w-100" style={{position: "relative"}}>
+                <h4>Image</h4>
+                {image && (
+                  <button style={{position: "absolute", backgroundColor: "transparent", width: "max-content", border: "none",top: "50%", right:"0" , fontSize: "20px"}} type="button" onClick={() => setImage(null)}>
+                    <RxCross2 />
+                  </button>
+                )}
                 <img
                   style={{
                     objectFit: "contain",
@@ -129,7 +135,13 @@ const EditCar = (props) => {
                   }}
                   width={150}
                   height={150}
-                  src={`https://rentacar.pythonanywhere.com${props.car.image}`}
+                  src={
+                    image
+                      ? URL.createObjectURL(
+                          new Blob([image], { type: image.type })
+                        )
+                      : `https://rentacar.pythonanywhere.com${props.car.image}`
+                  }
                 />
               </div>
               <label>Image: </label>{" "}

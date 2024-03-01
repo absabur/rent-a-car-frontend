@@ -1,7 +1,8 @@
 import { ErrorMessage, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
 import { createCar } from "../../Redux/Action/ownerAction";
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -116,6 +117,27 @@ const CreateCar = (props) => {
                 name="brand"
                 placeholder="Enter Car Brand"
               />
+              {image && (
+                <div className="d-flex flex-column w-100" style={{position: "relative"}}>
+                  <h4>Image</h4>
+                  <button style={{position: "absolute", backgroundColor: "transparent", width: "max-content", border: "none",top: "50%", right:"0" , fontSize: "20px"}} type="button" onClick={() => setImage(null)}>
+                    <RxCross2 />
+                  </button>
+                  <img
+                    style={{
+                      objectFit: "contain",
+                      borderRadius: "100%",
+                      backgroundColor: "black",
+                      margin: "auto",
+                    }}
+                    width={150}
+                    height={150}
+                    src={URL.createObjectURL(
+                      new Blob([image], { type: image.type })
+                    )}
+                  />
+                </div>
+              )}
               <label>Image: </label>{" "}
               <ErrorMessage name="image" component="span" />
               <input
