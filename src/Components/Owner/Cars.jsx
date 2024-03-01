@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getCars } from "../../Redux/Action/userAction";
 import { Button, Modal } from "reactstrap";
-import { deleteCar } from "../../Redux/Action/ownerAction";
+import { deleteCar, getOwnerCar } from "../../Redux/Action/ownerAction";
 import { useNavigate } from "react-router-dom";
 import EditCar from "./EditCar";
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCars: () => dispatch(getCars()),
+    getCars: () => dispatch(getOwnerCar()),
     deleteCar: (id, token) => dispatch(deleteCar(id, token)),
   };
 };

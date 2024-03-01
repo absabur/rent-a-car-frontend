@@ -1,7 +1,8 @@
 import axios from "axios";
 import { CAR_CREATED, CATEGORY, ERROR } from "../Constance";
-import { errorMessage, mybooking } from "./userAction";
+import { carsData, errorMessage, mybooking } from "./userAction";
 import { loadingFalse, loadingTrue } from "./authAction";
+import { BackendUrl } from "../../backurl";
 
 export const createCar = (data) => (dispatch) => {
   const token = localStorage.getItem("rent-a-car-token");
@@ -12,7 +13,7 @@ export const createCar = (data) => (dispatch) => {
   };
   dispatch(loadingTrue());
   axios
-    .post("https://rentacar.pythonanywhere.com/cars/", data, header)
+    .post(BackendUrl+"cars/", data, header)
     .then((res) => {
       dispatch(loadingFalse());
       dispatch(carAdd("Car Added"));
@@ -22,6 +23,23 @@ export const createCar = (data) => (dispatch) => {
       const key = Object.keys(error.response.data)[0];
       console.log(error.response.data[key]);
       dispatch(errorMessage(error.response.data[key]));
+    });
+};
+export const getOwnerCar = () => (dispatch) => {
+  const token = localStorage.getItem("rent-a-car-token");
+  const header = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  axios
+    .get(BackendUrl+"cars/",  header)
+    .then((res) => {
+      dispatch(carsData(res.data));
+    })
+    .catch((error) => {
+      const key = Object.keys(error.response.data)[0];
+      console.log(error.response.data[key]);
     });
 };
 
@@ -34,7 +52,7 @@ export const editCar = (data, id) => (dispatch) => {
   };
   dispatch(loadingTrue());
   axios
-    .put("https://rentacar.pythonanywhere.com/cars/" + id + "/", data, header)
+    .put(BackendUrl+"cars/" + id + "/", data, header)
     .then((res) => {
       dispatch(loadingFalse());
       dispatch(carAdd("Car Updated"));
@@ -54,9 +72,10 @@ export const ownerBookings = (id, token) => (dispatch) => {
     },
   };
   axios
-    .get("https://rentacar.pythonanywhere.com/bookings/?owner=" + id, header)
+    .get(BackendUrl+"bookings/?owner=" + id, header)
     .then((res) => {
       dispatch(mybooking(res.data));
+      console.log(res);
     })
     .catch((error) => {
       const key = Object.keys(error.response.data)[0];
@@ -66,7 +85,7 @@ export const ownerBookings = (id, token) => (dispatch) => {
 
 export const category = () => (dispatch) => {
   axios
-    .get("https://rentacar.pythonanywhere.com/category/all/")
+    .get(BackendUrl+"category/all/")
     .then((res) => {
       dispatch(categorySet(res.data));
     })
@@ -83,7 +102,7 @@ export const deleteCar = (id, token) => (dispatch) => {
   };
   dispatch(loadingTrue());
   axios
-    .delete("https://rentacar.pythonanywhere.com/cars/" + id + "/", header)
+    .delete(BackendUrl+"cars/" + id + "/", header)
     .then((res) => {
       dispatch(loadingFalse());
       dispatch(carAdd("Car is deleted"));

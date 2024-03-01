@@ -8,10 +8,11 @@ import {
   ERROR,
 } from "../Constance";
 import { loadingFalse, loadingTrue } from "./authAction";
+import { BackendUrl } from "../../backurl";
 
 export const getCars = () => (dispatch) => {
   axios
-    .get("https://rentacar.pythonanywhere.com/car/all/")
+    .get(BackendUrl+"car/all/")
     .then((res) => {
       dispatch(carsData(res.data));
     })
@@ -28,7 +29,7 @@ export const myBookings = (id, token) => (dispatch) => {
     },
   };
   axios
-    .get("https://rentacar.pythonanywhere.com/bookings/?user=" + id, header)
+    .get(BackendUrl+"bookings/?user=" + id, header)
     .then((res) => {
       dispatch(mybooking(res.data));
     })
@@ -40,7 +41,7 @@ export const myBookings = (id, token) => (dispatch) => {
 
 export const bookingList = (car) => (dispatch) => {
   axios
-    .get("https://rentacar.pythonanywhere.com/book/list/" + car + "/")
+    .get(BackendUrl+"book/list/" + car + "/")
     .then((res) => {
       dispatch(bookingDate(res.data));
     })
@@ -58,7 +59,7 @@ export const bookCar = (car, token) => (dispatch) => {
   };
   dispatch(loadingTrue());
   axios
-    .post("https://rentacar.pythonanywhere.com/book/", car, header)
+    .post(BackendUrl+"book/", car, header)
     .then((res) => {
       dispatch(loadingFalse());
       dispatch(booked());

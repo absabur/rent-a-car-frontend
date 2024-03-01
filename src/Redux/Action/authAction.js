@@ -11,6 +11,7 @@ import {
   USER_DATA,
 } from "../Constance";
 import { carAdd } from "./ownerAction";
+import { BackendUrl } from "../../backurl";
 
 export const register =
   (email, password, name, role="user", phone) =>
@@ -24,7 +25,7 @@ export const register =
     };
     dispatch(loadingTrue());
     axios
-      .post("https://rentacar.pythonanywhere.com/users/", data)
+      .post(BackendUrl+"users/", data)
       .then((res) => {
         dispatch(loadingFalse());
         dispatch(login(data.email, data.password));
@@ -52,7 +53,7 @@ export const updateProfile =
     };
     dispatch(loadingTrue());
     axios
-      .patch("https://rentacar.pythonanywhere.com/users/"+id+"/", data, header)
+      .patch(BackendUrl+"users/"+id+"/", data, header)
       .then((res) => {
         dispatch(loadingFalse());
         dispatch(carAdd("Profile Updated!"));
@@ -71,7 +72,7 @@ export const login = (email, password) => (dispatch) => {
   };
   dispatch(loadingTrue());
   axios
-    .post("https://rentacar.pythonanywhere.com/token/", data)
+    .post(BackendUrl+"token/", data)
     .then((res) => {
       dispatch(loadingFalse());
       dispatch(loginAction(res.data.access, "Login successful"));
@@ -91,7 +92,7 @@ export const userDeatils = () => (dispatch) => {
     },
   };
   axios
-    .get("https://rentacar.pythonanywhere.com/users/" + id + "/", header)
+    .get(BackendUrl+"/users/" + id + "/", header)
     .then((res) => {
       dispatch(userData(res.data));
     })
