@@ -39,6 +39,7 @@ const Cars = (props) => {
       navigate("/owner/cars");
     }
   }, [props, navigate]);
+  
   return (
     <div className="home">
       <h1 className="text-center">My Cars</h1>
@@ -54,7 +55,7 @@ const Cars = (props) => {
                 )}
                 <img
                   className="card-image"
-                  src={`https://rentacar.pythonanywhere.com${car.image}`}
+                  src={`${car.image}`}
                   alt="Car"
                 />
                 <div className="card-details">

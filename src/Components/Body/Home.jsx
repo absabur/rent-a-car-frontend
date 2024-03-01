@@ -28,6 +28,7 @@ const Home = (props) => {
   useEffect(() => {
     props.getCars();
   }, []);
+  console.log(props.cars);
   return (
     <div className="home">
       <h1 className="text-center">Rent A Car</h1>
