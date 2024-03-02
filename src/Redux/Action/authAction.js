@@ -35,6 +35,9 @@ export const register =
         dispatch(loadingFalse());
         const key = Object.keys(error.response.data)[0];
         dispatch(errorAction(error.response.data[key]));
+        if (error.response.data[key][0]) {
+          dispatch(errorAction(error.response.data[key][0]));
+        }
       });
   };
 export const updateProfile =
