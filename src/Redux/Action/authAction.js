@@ -31,6 +31,7 @@ export const register =
         dispatch(login(data.email, data.password));
       })
       .catch((error) => {
+        console.log(error);
         dispatch(loadingFalse());
         const key = Object.keys(error.response.data)[0];
         dispatch(errorAction(error.response.data[key]));

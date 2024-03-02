@@ -140,7 +140,7 @@ const EditCar = (props) => {
                       ? URL.createObjectURL(
                           new Blob([image], { type: image.type })
                         )
-                      : `https://rentacar.pythonanywhere.com${props.car.image}`
+                      : `${props.car.image}`
                   }
                 />
               </div>

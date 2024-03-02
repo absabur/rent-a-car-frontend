@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CAR_CREATED, CATEGORY, ERROR } from "../Constance";
+import { CAR_CREATED, CATEGORY, ERROR, OWNER_BOOKING_DATA, OWNER_CARS_DATA } from "../Constance";
 import { carsData, errorMessage, mybooking } from "./userAction";
 import { loadingFalse, loadingTrue } from "./authAction";
 import { BackendUrl } from "../../backurl";
@@ -32,15 +32,24 @@ export const getOwnerCar = () => (dispatch) => {
       Authorization: "Bearer " + token,
     },
   };
+  dispatch(loadingTrue());
   axios
     .get(BackendUrl+"cars/",  header)
     .then((res) => {
-      dispatch(carsData(res.data));
+      dispatch(ownerCarsData(res.data));
+      dispatch(loadingFalse());
     })
     .catch((error) => {
       const key = Object.keys(error.response.data)[0];
       console.log(error.response.data[key]);
+      dispatch(loadingFalse());
     });
+};
+export const ownerCarsData = (data) => {
+  return {
+    type: OWNER_CARS_DATA,
+    payload: data,
+  };
 };
 
 export const editCar = (data, id) => (dispatch) => {
@@ -71,18 +80,25 @@ export const ownerBookings = (id, token) => (dispatch) => {
       Authorization: "Bearer " + token,
     },
   };
+  dispatch(loadingTrue());
   axios
     .get(BackendUrl+"bookings/?owner=" + id, header)
     .then((res) => {
-      dispatch(mybooking(res.data));
-      console.log(res);
+      dispatch(ownerBooking(res.data));
+      dispatch(loadingFalse());
     })
     .catch((error) => {
       const key = Object.keys(error.response.data)[0];
       console.log(error.response.data[key]);
+      dispatch(loadingFalse())
     });
 };
-
+export const ownerBooking = (data) => {
+  return {
+    type: OWNER_BOOKING_DATA,
+    payload: data,
+  };
+};
 export const category = () => (dispatch) => {
   axios
     .get(BackendUrl+"category/all/")

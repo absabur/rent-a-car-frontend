@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./Booking.css";
+import Loading from '../Loading/Loading'
 
 import { ownerBookings } from "../../Redux/Action/ownerAction";
 
@@ -11,15 +12,18 @@ const mapDispatchToProps = (dispatch) => {
 };
 const mapStateToProps = (state) => {
   return {
-    booking: state.user.booking,
+    booking: state.user.owner_booking,
     token: state.auth.token,
     id: state.auth.userId,
+    booking_fatched: state.user.booking_fatched,
   };
 };
 
 const Bookings = (props) => {
   useEffect(() => {
-    props.ownerBookings(props.id, props.token);
+    if (props.booking.length === 0 && !props.booking_fatched) {
+      props.ownerBookings(props.id, props.token);
+    }
   }, []);
   return (
     <div className="booking">

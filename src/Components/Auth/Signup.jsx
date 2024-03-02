@@ -6,7 +6,7 @@ import { register } from "../../Redux/Action/authAction";
 const mapDispatchToProps = (dispatch) => {
   return {
     register: (email, password, name, role, phone) =>
-      dispatch(register(email, password, name, "user", phone)),
+      dispatch(register(email, password, name, role, phone)),
   };
 };
 const mapStateToProps = (state) => {
@@ -26,6 +26,7 @@ const Register = (props) => {
             values.email,
             values.password,
             values.name,
+            "user",
             values.phone
           )
         }

@@ -74,6 +74,11 @@ const Main = (props) => {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (props.success === "Login successful") {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
     if (props.success) {
       toast.success(props.success, {
         position: "top-right",

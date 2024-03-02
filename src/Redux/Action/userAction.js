@@ -6,6 +6,7 @@ import {
   EMPTY_BOOKING_DATE,
   BOOKED,
   ERROR,
+  RELOAD_BOOKINGS,
 } from "../Constance";
 import { loadingFalse, loadingTrue } from "./authAction";
 import { BackendUrl } from "../../backurl";
@@ -28,14 +29,17 @@ export const myBookings = (id, token) => (dispatch) => {
       Authorization: "Bearer " + token,
     },
   };
+  dispatch(loadingTrue());
   axios
     .get(BackendUrl+"bookings/?user=" + id, header)
     .then((res) => {
       dispatch(mybooking(res.data));
+      dispatch(loadingFalse());
     })
     .catch((error) => {
       const key = Object.keys(error.response.data)[0];
       console.log(error.response.data[key]);
+      dispatch(loadingFalse());
     });
 };
 
@@ -62,6 +66,7 @@ export const bookCar = (car, token) => (dispatch) => {
     .post(BackendUrl+"book/", car, header)
     .then((res) => {
       dispatch(loadingFalse());
+      dispatch(reloadBookings());
       dispatch(booked());
     })
     .catch((error) => {
@@ -74,6 +79,14 @@ export const bookCar = (car, token) => (dispatch) => {
 export const booked = () => {
   return {
     type: BOOKED,
+    payload: {
+      success: "Car Book was successfull!",
+    },
+  };
+};
+export const reloadBookings = () => {
+  return {
+    type: RELOAD_BOOKINGS,
     payload: {
       success: "Car Book was successfull!",
     },
