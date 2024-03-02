@@ -16,6 +16,8 @@ export const EMPTY_BOOKING_DATE = "EMPTY_BOOKING_DATE";
 export const BOOKED = "BOOKED";
 export const RELOAD_BOOKINGS = "RELOAD_BOOKINGS";
 
+export const BOOKING_LIST_UPDATED = "BOOKING_LIST_UPDATED";
+export const CAR_LIST_UPDATED = "CAR_LIST_UPDATED";
 export const CAR_CREATED = "CAR_CREATED";
 export const CATEGORY = "CATEGORY";
 

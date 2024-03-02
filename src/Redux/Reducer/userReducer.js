@@ -1,4 +1,4 @@
-import { BOOKING_DATA, BOOKING_DATE, CARS_DATA, CATEGORY, EMPTY_BOOKING_DATE, OWNER_BOOKING_DATA, OWNER_CARS_DATA, RELOAD_BOOKINGS } from "../Constance";
+import { BOOKING_DATA, BOOKING_DATE, BOOKING_LIST_UPDATED, CARS_DATA, CAR_LIST_UPDATED, CATEGORY, EMPTY_BOOKING_DATE, OWNER_BOOKING_DATA, OWNER_CARS_DATA, RELOAD_BOOKINGS } from "../Constance";
   
   const initialState = {
     cars: [],
@@ -25,6 +25,11 @@ import { BOOKING_DATA, BOOKING_DATE, CARS_DATA, CATEGORY, EMPTY_BOOKING_DATE, OW
           owner_cars: action.payload,
           car_fatched: true,
         };
+      case CAR_LIST_UPDATED:
+        return {
+          ...state,
+          car_fatched: false,
+        };
       case BOOKING_DATA:
         return {
           ...state,
@@ -41,6 +46,11 @@ import { BOOKING_DATA, BOOKING_DATE, CARS_DATA, CATEGORY, EMPTY_BOOKING_DATE, OW
           ...state,
           owner_booking: action.payload,
           booking_fatched: true,
+        };
+      case BOOKING_LIST_UPDATED:
+        return {
+          ...state,
+          booking_fatched: false,
         };
       case BOOKING_DATE:
         return {

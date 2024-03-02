@@ -66,7 +66,6 @@ export const bookCar = (car, token) => (dispatch) => {
     .post(BackendUrl+"book/", car, header)
     .then((res) => {
       dispatch(loadingFalse());
-      dispatch(reloadBookings());
       dispatch(booked());
     })
     .catch((error) => {

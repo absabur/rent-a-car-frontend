@@ -37,6 +37,9 @@ const Cars = (props) => {
     if (props.cars.length === 0 && !props.car_fatched) {
       props.getOwnerCar();
     }
+    if (!props.car_fatched) {
+      props.getOwnerCar();
+    }
   }, []);
   const navigate = useNavigate();
   useEffect(() => {

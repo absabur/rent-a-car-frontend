@@ -29,9 +29,10 @@ import Profile from "./Body/Profile";
 import CreateCar from "./Owner/CreateCar";
 import Bookings from "./Owner/Bookings";
 import Cars from "./Owner/Cars";
-import { category } from "../Redux/Action/ownerAction";
+import { category, ownerBookingList } from "../Redux/Action/ownerAction";
 import LoadingPage from "./Loading/Loading";
 import UpdateProfile from "./Body/UpdateProfile";
+import { reloadBookings } from "../Redux/Action/userAction";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -39,6 +40,8 @@ const mapDispatchToProps = (dispatch) => {
     authCheck: () => dispatch(authCheck()),
     userDeatils: () => dispatch(userDeatils()),
     category: () => dispatch(category()),
+    ownerBookingList: () => dispatch(ownerBookingList()),
+    reloadBookings: () => dispatch(reloadBookings()),
   };
 };
 const mapStateToProps = (state) => {
@@ -71,6 +74,12 @@ const Main = (props) => {
     props.authCheck();
     props.userDeatils();
     props.category();
+    if (location.pathname !== "/owner/booking") {
+      props.ownerBookingList()
+    }
+    if (location.pathname !== "/my-bookings") {
+      props.reloadBookings()
+    }
   }, [location.pathname]);
 
   useEffect(() => {

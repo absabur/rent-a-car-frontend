@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CAR_CREATED, CATEGORY, ERROR, OWNER_BOOKING_DATA, OWNER_CARS_DATA } from "../Constance";
-import { carsData, errorMessage, mybooking } from "./userAction";
+import { BOOKING_LIST_UPDATED, CAR_CREATED, CAR_LIST_UPDATED, CATEGORY, ERROR, OWNER_BOOKING_DATA, OWNER_CARS_DATA } from "../Constance";
+import { errorMessage } from "./userAction";
 import { loadingFalse, loadingTrue } from "./authAction";
 import { BackendUrl } from "../../backurl";
 
@@ -15,6 +15,7 @@ export const createCar = (data) => (dispatch) => {
   axios
     .post(BackendUrl+"cars/", data, header)
     .then((res) => {
+      dispatch(carListUpdate());
       dispatch(loadingFalse());
       dispatch(carAdd("Car Added"));
     })
@@ -63,6 +64,7 @@ export const editCar = (data, id) => (dispatch) => {
   axios
     .put(BackendUrl+"cars/" + id + "/", data, header)
     .then((res) => {
+      dispatch(carListUpdate());
       dispatch(loadingFalse());
       dispatch(carAdd("Car Updated"));
     })
@@ -120,6 +122,7 @@ export const deleteCar = (id, token) => (dispatch) => {
   axios
     .delete(BackendUrl+"cars/" + id + "/", header)
     .then((res) => {
+      dispatch(carListUpdate());
       dispatch(loadingFalse());
       dispatch(carAdd("Car is deleted"));
     })
@@ -137,6 +140,16 @@ export const carAdd = (msg) => {
     payload: {
       success: msg,
     },
+  };
+};
+export const carListUpdate = () => {
+  return {
+    type: CAR_LIST_UPDATED,
+  };
+};
+export const ownerBookingList = () => {
+  return {
+    type:BOOKING_LIST_UPDATED,
   };
 };
 

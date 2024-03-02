@@ -24,6 +24,9 @@ const Bookings = (props) => {
     if (props.booking.length === 0 && !props.booking_fatched) {
       props.ownerBookings(props.id, props.token);
     }
+    if (!props.booking_fatched) {
+      props.ownerBookings(props.id, props.token);
+    }
   }, []);
   return (
     <div className="booking">
